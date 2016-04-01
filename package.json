@@ -1,0 +1,20 @@
+{
+  "name": "tm-slexa",
+  "version": "0.1.0",
+  "description": "Ticketmaster Alexa App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team Centaur",
+  "license": "ISC",
+  "devDependencies": {
+    "alexa-app": "^2.3.2",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "node-notifier": "^4.5.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {}
+}
