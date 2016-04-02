@@ -1,12 +1,12 @@
 var alexa = require('alexa-app');
 var app = new alexa.app('ticketmaster');
+var config = require('./config');
 
 var FindEventsIntent = require('./intentHandlers/findEvents');
 
 
 app.pre = function(request,response,type) {
-	if (request.sessionDetails.application.applicationId!="amzn1.echo-sdk-ams.app.a552d2b7-d520-4f5f-ad06-ed98d3524c45") {
-		// Fail ungracefully 
+	if (request.sessionDetails.application.applicationId != config.app.id) {
 		response.fail("Invalid applicationId");
 	}
 };
@@ -20,7 +20,7 @@ app.launch(function(request,response) {
 app.intent('FindEventsIntent', function(request,response) {
 	FindEventsIntent.init(request,response);
 	
-    return false;
+  return false;
 });
 
 // Connect to AWS Lambda
