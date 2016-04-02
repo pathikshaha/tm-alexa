@@ -19,6 +19,8 @@ app.launch(function(request,response) {
 // FindEventsIntent
 app.intent('FindEventsIntent', function(request,response) {
 	FindEventsIntent.init(request,response);
+	
+    return false;
 });
 
 // Connect to AWS Lambda
