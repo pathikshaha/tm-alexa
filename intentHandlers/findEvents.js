@@ -1,17 +1,15 @@
-'use strict';
-
-const _ = require('lodash');
-const http = require('http');
-const config = require('../config');
+var _ = require('lodash');
+var http = require('http');
+var config = require('../config');
 
 module.exports = {
 	init: function(request,response) {
-		const searchTypeSlot = request.slot('SearchType');
-		const keyword = request.slot('Keyword');
+		var searchTypeSlot = request.slot('SearchType');
+		var keyword = request.slot('Keyword');
 
 		if (keyword || searchTypeSlot) {
-			const apiConfig = config.api.tm;
-			let url = apiConfig.baseURL
+			var apiConfig = config.api.tm;
+			var url = apiConfig.baseURL
 				+ apiConfig.discoveryURL
 				+ apiConfig.version
 				+ '/events.json?apikey='
@@ -26,17 +24,17 @@ module.exports = {
 			}
 
 			http.get(url, function(res) {
-				let data = '';
+				var data = '';
 
 				res.on('data', function (chunk){
 					data += chunk;
 				});
 
 				res.on('end',function(){
-					const obj = JSON.parse(data);
-					const events = _.get(obj, '._embedded.events', [])
+					var obj = JSON.parse(data);
+					var events = _.get(obj, '._embedded.events', [])
 												.map(function(event) {
-													return event.name + ' at ' + _.get(event, '_embedded.venues[0].name', '');
+													return '<p>' + event.name + ' at ' + _.get(event, '_embedded.venues[0].name', '') + '</p>';
 												});
 
 					_.forEach(events, function(event) {

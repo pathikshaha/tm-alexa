@@ -1,10 +1,8 @@
-'use strict';
+var alexa = require('alexa-app');
+var app = new alexa.app('ticketmaster');
+var config = require('./config');
 
-const alexa = require('alexa-app');
-const app = new alexa.app('ticketmaster');
-const config = require('./config');
-
-const FindEventsIntent = require('./intentHandlers/findEvents');
+var FindEventsIntent = require('./intentHandlers/findEvents');
 
 
 app.pre = function(request,response,type) {
