@@ -1,8 +1,10 @@
-var alexa = require('alexa-app');
-var app = new alexa.app('ticketmaster');
-var config = require('./config');
+'use strict';
 
-var FindEventsIntent = require('./intentHandlers/findEvents');
+const alexa = require('alexa-app');
+const app = new alexa.app('ticketmaster');
+const config = require('./config');
+
+const FindEventsIntent = require('./intentHandlers/findEvents');
 
 
 app.pre = function(request,response,type) {
@@ -19,7 +21,7 @@ app.launch(function(request,response) {
 // FindEventsIntent
 app.intent('FindEventsIntent', function(request,response) {
 	FindEventsIntent.init(request,response);
-	
+
   return false;
 });
 

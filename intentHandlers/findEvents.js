@@ -1,18 +1,20 @@
-var _ = require('lodash');
-var http = require('http');
-var config = require('../config');
+'use strict';
+
+const _ = require('lodash');
+const http = require('http');
+const config = require('../config');
 
 module.exports = {
 	init: function(request,response) {
-		var searchTypeSlot = request.slot('SearchType');
-		var keyword = request.slot('Keyword');
+		const searchTypeSlot = request.slot('SearchType');
+		const keyword = request.slot('Keyword');
 
 		if (keyword || searchTypeSlot) {
-			var apiConfig = config.api.tm;
-			var url = apiConfig.baseURL 
-				+ apiConfig.discoveryURL 
-				+ apiConfig.version 
-				+ '/events.json?apikey=' 
+			const apiConfig = config.api.tm;
+			let url = apiConfig.baseURL
+				+ apiConfig.discoveryURL
+				+ apiConfig.version
+				+ '/events.json?apikey='
 				+ apiConfig.apiKey;
 
 			if (keyword) {
@@ -24,15 +26,15 @@ module.exports = {
 			}
 
 			http.get(url, function(res) {
-				var data = '';
+				let data = '';
 
 				res.on('data', function (chunk){
 					data += chunk;
 				});
 
 				res.on('end',function(){
-					var obj = JSON.parse(data);
-					var events = _.get(obj, '._embedded.events', [])
+					const obj = JSON.parse(data);
+					const events = _.get(obj, '._embedded.events', [])
 												.map(function(event) {
 													return event.name + ' at ' + _.get(event, '_embedded.venues[0].name', '');
 												});
@@ -57,7 +59,7 @@ module.exports = {
 		} else {
 
 			response.say("I'm not sure what you are looking for. You can ask me to find events nearby or find events this weekend");
-			
+
 		}
 	}
 }
